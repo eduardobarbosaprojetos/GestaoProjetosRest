@@ -64,6 +64,10 @@ public class ProjetosController {
       ProjetosTipos tipo_projeto = tp_proj.get();
       return ResponseEntity.ok(tipo_projeto);
    }
+   @GetMapping({"/projetos/list"})
+   public List<Projetos> listar_Projetos() {
+      return this.projetoRepositorio.findAll();
+   }
    @PostMapping({"/cadastrarProjeto"})
    public ResponseEntity<Projetos> cadastrar(@RequestBody Projetos projeto) throws ParseException {
       ObjetoMensagens msg = new ObjetoMensagens();
