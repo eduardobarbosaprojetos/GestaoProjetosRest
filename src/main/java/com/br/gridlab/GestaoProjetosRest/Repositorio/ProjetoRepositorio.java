@@ -20,5 +20,5 @@ public interface ProjetoRepositorio extends JpaRepository<Projetos, Long> {
       value = "select TOP(1) * from projetos where codigo_projeto = ?1",
       nativeQuery = true
    )
-   Optional<Projetos> consultaPorNumeroContrato(String numero);
+   Optional<Projetos> consultaPorCodigoProjeto(String numero);
 }
