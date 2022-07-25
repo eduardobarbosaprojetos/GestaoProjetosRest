@@ -17,6 +17,7 @@ import com.br.gridlab.GestaoProjetosRest.Util.Util;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,6 +25,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -91,27 +93,38 @@ public class ProjetosController {
          }
       }
    }
-   @PostMapping({"/atualizarProjeto"})
+   @PutMapping({"/atualizarProjeto"})
    public ResponseEntity<Projetos> atualizar(@RequestBody Projetos projeto) throws ParseException {
       ObjetoMensagens msg = new ObjetoMensagens();
-      Optional<Projetos> proj = this.projetoRepositorio.consultaPorCodigoProjeto(projeto.getCodigo_projeto());
-      if (proj.isPresent()) {
-         msg.setStatus(HttpStatus.FOUND.value());
-         msg.setMessage("O Projeto já existe");
-         msg.setTipo(1);
-         return new ResponseEntity(msg, HttpStatus.BAD_REQUEST);
-      } else {
-         Util objUtil = new Util();
+      Projetos proj = this.projetoRepositorio.getById(projeto.getId_projeto());
+      if (Objects.equals(proj.getId_projeto(), projeto.getId_projeto())) {
+          //System.out.println("Id Projeto Post:"+ projeto.getId_projeto());
+          //System.out.println("Id Projeto getById:"+ proj.getId_projeto());
+           Util objUtil = new Util();
          LocalDate dtfim = objUtil.RetornaDataTerminoContrato(projeto.getData_inicio(), projeto.getDuracao_estimada());
          projeto.setData_fim(dtfim);
-         projeto.setData_criacao(LocalDate.now());
+         projeto.setData_criacao(projeto.getData_criacao());
+         projeto.setData_atualizacao(LocalDate.now());
 
          try {
+             //System.out.println("caiu no try");
             this.projetoRepositorio.save(projeto);
+             //System.out.println("passou do save");
             return ResponseEntity.ok(projeto);
          } catch (Exception var7) {
+              //System.out.println("caiu no catch");
+               msg.setStatus(HttpStatus.NOT_FOUND.value());
+               msg.setMessage("");
+               //System.out.println(var7.getMessage());
+               msg.setTipo(1);
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
          }
+         
+      } else {
+        msg.setStatus(HttpStatus.NOT_FOUND.value());
+         msg.setMessage("O Projeto informado não existe");
+         msg.setTipo(1);
+         return new ResponseEntity(msg, HttpStatus.BAD_REQUEST);
       }
    }
 }
