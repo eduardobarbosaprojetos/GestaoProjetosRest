@@ -100,7 +100,7 @@ public class ProjetosController {
       if (Objects.equals(proj.getId_projeto(), projeto.getId_projeto())) {
           //System.out.println("Id Projeto Post:"+ projeto.getId_projeto());
           //System.out.println("Id Projeto getById:"+ proj.getId_projeto());
-           Util objUtil = new Util();
+         Util objUtil = new Util();
          LocalDate dtfim = objUtil.RetornaDataTerminoContrato(projeto.getData_inicio(), projeto.getDuracao_estimada());
          projeto.setData_fim(dtfim);
          projeto.setData_criacao(projeto.getData_criacao());
