@@ -70,6 +70,10 @@ public class ProjetosController {
    public List<Projetos> listar_Projetos() {
       return this.projetoRepositorio.findAll();
    }
+   @GetMapping({"/projetos/list/{status}"})
+   public List<Projetos> listar_Projetos_status(@PathVariable Long status) {
+      return this.projetoRepositorio.consultaPorStatus(status);
+   }
    @PostMapping({"/cadastrarProjeto"})
    public ResponseEntity<Projetos> cadastrar(@RequestBody Projetos projeto) throws ParseException {
       ObjetoMensagens msg = new ObjetoMensagens();
@@ -84,7 +88,7 @@ public class ProjetosController {
          LocalDate dtfim = objUtil.RetornaDataTerminoContrato(projeto.getData_inicio(), projeto.getDuracao_estimada());
          projeto.setData_fim(dtfim);
          projeto.setData_criacao(LocalDate.now());
-
+         //projeto.setStatus(1);//seta sempre ao cadastrar como 1 - Ativo / 2 - Encerrado
          try {
             this.projetoRepositorio.save(projeto);
             return ResponseEntity.ok(projeto);
@@ -105,7 +109,6 @@ public class ProjetosController {
          projeto.setData_fim(dtfim);
          projeto.setData_criacao(projeto.getData_criacao());
          projeto.setData_atualizacao(LocalDate.now());
-
          try {
              //System.out.println("caiu no try");
             this.projetoRepositorio.save(projeto);

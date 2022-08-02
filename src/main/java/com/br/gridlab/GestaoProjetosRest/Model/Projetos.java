@@ -186,11 +186,37 @@ public class Projetos implements Serializable {
       nullable = true
    )
    private LocalDate data_atualizacao;
-
+   @Column(
+      name = "status",
+      nullable = false
+   )
+   private Integer status;
+   @Column(
+      name = "data_encerrado",
+      nullable = true
+   )
+   private LocalDate data_encerrado;
+   @Column(
+      name = "matricula_encerrou",
+      nullable = true
+   )
+   private int matricula_encerrou;
+   
    public Projetos() {
    }
 
-   public Projetos(Long id_projeto, String codigo_projeto, String nome, Long id_tipo_projeto, String cliente, String numero_contrato, String descricao_contrato, String gestor1, String gestor2, BigDecimal total_receitas_estimado, BigDecimal total_despesas_estimado, BigDecimal total_desp_pessoal_estimado, BigDecimal total_desp_insumos_estimado, BigDecimal total_desp_outros_estimado, BigDecimal total_icms_estimado, BigDecimal total_ipi_estimado, BigDecimal total_iss_estimado, BigDecimal total_pis_estimado, BigDecimal total_cofins_estimado, BigDecimal total_irpj_estimado, BigDecimal total_airpj_estimado, BigDecimal total_csll_estimado, BigDecimal total, Integer duracao_estimada, LocalDate data_inicio, LocalDate data_fim, int matricula_criador, LocalDate data_criacao, int matricula_atualizacao, LocalDate data_atualizacao) throws ParseException {
+   public Projetos(Long id_projeto, String codigo_projeto, String nome, Long id_tipo_projeto, String cliente, 
+           String numero_contrato, String descricao_contrato, String gestor1, String gestor2, 
+           BigDecimal total_receitas_estimado, BigDecimal total_despesas_estimado, 
+           BigDecimal total_desp_pessoal_estimado, BigDecimal total_desp_insumos_estimado, 
+           BigDecimal total_desp_outros_estimado, BigDecimal total_icms_estimado, 
+           BigDecimal total_ipi_estimado, BigDecimal total_iss_estimado, 
+           BigDecimal total_pis_estimado, BigDecimal total_cofins_estimado, 
+           BigDecimal total_irpj_estimado, BigDecimal total_airpj_estimado, 
+           BigDecimal total_csll_estimado, BigDecimal total, Integer duracao_estimada, 
+           LocalDate data_inicio, LocalDate data_fim, int matricula_criador, 
+           LocalDate data_criacao, int matricula_atualizacao, LocalDate data_atualizacao,Integer status,
+           LocalDate data_encerrado, int matricula_encerrou) throws ParseException {
       this.id_projeto = id_projeto;
       this.codigo_projeto = codigo_projeto;
       this.nome = nome;
@@ -221,9 +247,12 @@ public class Projetos implements Serializable {
       this.data_criacao = data_criacao;
       this.matricula_atualizacao = matricula_atualizacao;
       this.data_atualizacao = data_atualizacao;
+      this.status = status;
+      this.data_encerrado = data_encerrado;
+      this.matricula_encerrou = matricula_encerrou;
    }
 
-   public Projetos(String codigo_projeto, String nome, Long id_tipo_projeto, String cliente, String numero_contrato, String descricao_contrato, String gestor1, String gestor2, BigDecimal total_receitas_estimado, BigDecimal total_despesas_estimado, BigDecimal total_desp_pessoal_estimado, BigDecimal total_desp_insumos_estimado, BigDecimal total_desp_outros_estimado, BigDecimal total_icms_estimado, BigDecimal total_ipi_estimado, BigDecimal total_iss_estimado, BigDecimal total_pis_estimado, BigDecimal total_cofins_estimado, BigDecimal total_irpj_estimado, BigDecimal total_airpj_estimado, BigDecimal total_csll_estimado, BigDecimal total, Integer duracao_estimada, LocalDate data_inicio, LocalDate data_fim, int matricula_criador, LocalDate data_criacao, int matricula_atualizacao, LocalDate data_atualizacao) throws ParseException {
+   public Projetos(String codigo_projeto, String nome, Long id_tipo_projeto, String cliente, String numero_contrato, String descricao_contrato, String gestor1, String gestor2, BigDecimal total_receitas_estimado, BigDecimal total_despesas_estimado, BigDecimal total_desp_pessoal_estimado, BigDecimal total_desp_insumos_estimado, BigDecimal total_desp_outros_estimado, BigDecimal total_icms_estimado, BigDecimal total_ipi_estimado, BigDecimal total_iss_estimado, BigDecimal total_pis_estimado, BigDecimal total_cofins_estimado, BigDecimal total_irpj_estimado, BigDecimal total_airpj_estimado, BigDecimal total_csll_estimado, BigDecimal total, Integer duracao_estimada, LocalDate data_inicio, LocalDate data_fim, int matricula_criador, LocalDate data_criacao, int matricula_atualizacao, LocalDate data_atualizacao,Integer status,LocalDate data_encerrado, int matricula_encerrou) throws ParseException {
       this.codigo_projeto = codigo_projeto;
       this.nome = nome;
       this.id_tipo_projeto = id_tipo_projeto;
@@ -253,6 +282,9 @@ public class Projetos implements Serializable {
       this.data_criacao = data_criacao;
       this.matricula_atualizacao = matricula_atualizacao;
       this.data_atualizacao = data_atualizacao;
+      this.status = status;
+      this.data_encerrado = data_encerrado;
+      this.matricula_encerrou = matricula_encerrou;
    }
 
    public Long getId_projeto() {
@@ -495,7 +527,36 @@ public class Projetos implements Serializable {
       this.data_atualizacao = data_atualizacao;
    }
 
-   public String toString() {
-      return "Projetos{id_projeto=" + this.id_projeto + ", codigo_projeto=" + this.codigo_projeto + ", nome=" + this.nome + ", id_tipo_projeto=" + this.id_tipo_projeto + ", cliente=" + this.cliente + ", numero_contrato=" + this.numero_contrato + ", descricao_contrato=" + this.descricao_contrato + ", gestor1=" + this.gestor1 + ", gestor2=" + this.gestor2 + ", total_receitas_estimado=" + this.total_receitas_estimado + ", total_despesas_estimado=" + this.total_despesas_estimado + ", total_desp_pessoal_estimado=" + this.total_desp_pessoal_estimado + ", total_desp_insumos_estimado=" + this.total_desp_insumos_estimado + ", total_desp_outros_estimado=" + this.total_desp_outros_estimado + ", total_icms_estimado=" + this.total_icms_estimado + ", total_ipi_estimado=" + this.total_ipi_estimado + ", total_iss_estimado=" + this.total_iss_estimado + ", total_pis_estimado=" + this.total_pis_estimado + ", total_cofins_estimado=" + this.total_cofins_estimado + ", total_irpj_estimado=" + this.total_irpj_estimado + ", total_airpj_estimado=" + this.total_airpj_estimado + ", total_csll_estimado=" + this.total_csll_estimado + ", total=" + this.total + ", duracao_estimada=" + this.duracao_estimada + ", data_inicio=" + this.data_inicio + ", data_fim=" + this.data_fim + ", matricula_criador=" + this.matricula_criador + ", data_criacao=" + this.data_criacao + ", matricula_atualizacao=" + this.matricula_atualizacao + ", data_atualizacao=" + this.data_atualizacao + '}';
-   }
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public LocalDate getData_encerrado() {
+        return data_encerrado;
+    }
+
+    public void setData_encerrado(LocalDate data_encerrado) {
+        this.data_encerrado = data_encerrado;
+    }
+
+    public int getMatricula_encerrou() {
+        return matricula_encerrou;
+    }
+
+    public void setMatricula_encerrou(int matricula_encerrou) {
+        this.matricula_encerrou = matricula_encerrou;
+    }
+
+    @Override
+    public String toString() {
+        return "Projetos{" + "id_projeto=" + id_projeto + ", codigo_projeto=" + codigo_projeto + ", nome=" + nome + ", id_tipo_projeto=" + id_tipo_projeto + ", cliente=" + cliente + ", numero_contrato=" + numero_contrato + ", descricao_contrato=" + descricao_contrato + ", gestor1=" + gestor1 + ", gestor2=" + gestor2 + ", total_receitas_estimado=" + total_receitas_estimado + ", total_despesas_estimado=" + total_despesas_estimado + ", total_desp_pessoal_estimado=" + total_desp_pessoal_estimado + ", total_desp_insumos_estimado=" + total_desp_insumos_estimado + ", total_desp_outros_estimado=" + total_desp_outros_estimado + ", total_icms_estimado=" + total_icms_estimado + ", total_ipi_estimado=" + total_ipi_estimado + ", total_iss_estimado=" + total_iss_estimado + ", total_pis_estimado=" + total_pis_estimado + ", total_cofins_estimado=" + total_cofins_estimado + ", total_irpj_estimado=" + total_irpj_estimado + ", total_airpj_estimado=" + total_airpj_estimado + ", total_csll_estimado=" + total_csll_estimado + ", total=" + total + ", duracao_estimada=" + duracao_estimada + ", data_inicio=" + data_inicio + ", data_fim=" + data_fim + ", matricula_criador=" + matricula_criador + ", data_criacao=" + data_criacao + ", matricula_atualizacao=" + matricula_atualizacao + ", data_atualizacao=" + data_atualizacao + ", status=" + status + ", data_encerrado=" + data_encerrado + ", matricula_encerrou=" + matricula_encerrou + '}';
+    }
+
+    
+   
+   
 }
